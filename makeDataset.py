@@ -21,6 +21,7 @@ class MakeDataset():
             sd.wait()
             save_path = os.path.join(self.ds_path, class_name, class_name)
             write(save_path + '_' + str(sample) + '.wav', fs, recorded_sound)
+
             input(f'{self.n_sample - sample} sample to record for class {class_name},'
                   f' press Enter to continue: ')
             os.system('cls' if os.name == 'nt' else 'clear')
