@@ -37,6 +37,7 @@ class MakeDataset():
             save_path = os.path.join(self.ds_path, class_name, class_name)
             write(save_path + '_' + str(sample) + '.wav', fs, recorded_sound)
             print(f'{self.n_sample - sample} sample to record, press Enter to continue: ')
+
             os.system('cls' if os.name == 'nt' else 'clear')
 
 
