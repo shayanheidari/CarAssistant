@@ -5,41 +5,40 @@ import os
 
 
 class MakeDataset():
-    def __init__(self, ds_path, n_sample):
+    def __init__(self, ds_path: str | os.PathLike, n_sample: int) -> None:
         self.ds_path = ds_path
         self.n_sample = n_sample
 
-    def record_save_audio(self, class_name='sample'):
+    def record_save_audio(self, class_name: str = 'sample', duration: int = 2) -> None:
         input(f'You are recording audio for class {class_name!r} '
               f'press Enter to start: ')
+        os.system('cls' if os.name == 'nt' else 'clear')
         for sample in tqdm(range(self.n_sample)):
             fs = 44100
-            seconds = 2
             if not os.path.exists(class_path := (self.ds_path + "/" + class_name)):
                 os.mkdir(class_path)
-            recorded_sound = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
+            recorded_sound = sd.rec(int(duration * fs), samplerate=fs, channels=2)
             sd.wait()
             save_path = os.path.join(self.ds_path, class_name, class_name)
             write(save_path + '_' + str(sample) + '.wav', fs, recorded_sound)
-            input(f'{self.n_sample - sample} sample to record, press Enter to continue: ')
+            input(f'{self.n_sample - sample} sample to record for class {class_name},'
+                  f' press Enter to continue: ')
             os.system('cls' if os.name == 'nt' else 'clear')
 
-    def record_save_background(self, class_name='background'):
+    def record_save_background(self, class_name: str = 'background', duration: int = 2):
         input(f'You are recording audio for class {class_name!r} '
               f'press Enter to start: ')
+        os.system('cls' if os.name == 'nt' else 'clear')
         for sample in tqdm(range(self.n_sample)):
             fs = 44100
-            seconds = 2
             if not os.path.exists(class_path := (self.ds_path + "/" + class_name)):
                 os.mkdir(class_path)
-            recorded_sound = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
+            recorded_sound = sd.rec(int(duration * fs), samplerate=fs, channels=2)
             sd.wait()
             save_path = os.path.join(self.ds_path, class_name, class_name)
             write(save_path + '_' + str(sample) + '.wav', fs, recorded_sound)
             print(f'{self.n_sample - sample} sample to record, press Enter to continue: ')
-
             os.system('cls' if os.name == 'nt' else 'clear')
-
 
 
 def main():
