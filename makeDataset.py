@@ -41,7 +41,7 @@ class MakeDataset():
 
 
 def main() -> None:
-    dataset_path = os.path.join('keyword')
+    dataset_path = os.path.join('datasets/keyword')
     keyword_ds = MakeDataset(ds_path=dataset_path, n_sample=10)
     keyword_ds.record_save_audio(class_name='machine')
     keyword_ds.record_save_background()

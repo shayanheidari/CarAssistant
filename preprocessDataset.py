@@ -4,6 +4,7 @@ import tensorflow as tf
 from typing import Any, Tuple
 import os
 import matplotlib.pyplot as plt
+from plotting import plot_spectrogram
 
 
 class PreprocessDataset():
@@ -46,16 +47,14 @@ class PreprocessDataset():
         return spectrogram, label
 
 def main() -> None:
-    ds = os.path.join('keyword')
+    ds = os.path.join('datasets/keyword')
     test = PreprocessDataset(ds)
     train_ds, _, _= test.load_audio_dataset(20)
     # train_white_ds = train_ds.map(test.add_white_noise)
     train_spec_ds = train_ds.map(test.preprocess_to_spectrogram, tf.data.AUTOTUNE)
-    for example_spectrograms , label in train_spec_ds.take(1):
+    for example_spectrograms , example_labels in train_spec_ds.take(2):
         break
-    for i in example_spectrograms:
-        plt.imshow(i)
-        plt.show()
+    plot_spectrogram(example_spectrograms, example_labels, test.class_names)
 
 
 if __name__ == '__main__':
